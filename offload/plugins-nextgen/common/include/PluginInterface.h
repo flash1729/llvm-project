@@ -89,17 +89,6 @@ inline Error error(error::ErrorCode Code, Error &&OtherError,
   return error::createOffloadError(Code, std::move(OtherError), Context);
 }
 
-/// Check the plugin-specific error code and return an error or success
-/// accordingly. In case of an error, create a string error with the error
-/// description. The ErrFmt should follow the format:
-///     "Error in <function name>[<optional info>]: %s"
-/// The last format specifier "%s" is mandatory and will be used to place the
-/// error code's description. Notice this function should be only called from
-/// the plugin-specific code.
-/// TODO: Refactor this, must be defined individually by each plugin.
-template <typename... ArgsTy>
-[[maybe_unused]] static Error check(int32_t ErrorCode, const char *ErrFmt,
-                                    ArgsTy... Args);
 } // namespace Plugin
 
 /// Class that wraps the __tgt_async_info to simply its usage. In case the

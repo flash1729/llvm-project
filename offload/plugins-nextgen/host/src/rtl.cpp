@@ -557,16 +557,6 @@ struct GenELF64PluginTy final : public GenericPluginTy {
   const char *getName() const override { return GETNAME(TARGET_NAME); }
 };
 
-template <typename... ArgsTy>
-[[maybe_unused]] static Error Plugin::check(int32_t Code, const char *ErrMsg,
-                                            ArgsTy... Args) {
-  if (Code == 0)
-    return Plugin::success();
-
-  return Plugin::error(ErrorCode::UNKNOWN, ErrMsg, Args...,
-                       std::to_string(Code).data());
-}
-
 } // namespace plugin
 } // namespace target
 } // namespace omp

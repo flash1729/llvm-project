@@ -48,6 +48,14 @@ namespace omp {
 namespace target {
 namespace plugin {
 
+// Plugin::check() decodes this plugin's native error codes, so it is declared
+// and defined here rather than in the shared header. 'static' gives each
+// plugin its own internal-linkage copy.
+namespace Plugin {
+template <typename... ArgsTy>
+static Error check(int32_t ErrorCode, const char *ErrFmt, ArgsTy... Args);
+} // namespace Plugin
+
 /// Forward declarations for all specialized data structures.
 struct CUDAKernelTy;
 struct CUDADeviceTy;
